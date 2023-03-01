@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Tilt+Prism&display=swap" rel="stylesheet">
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Tilt+Neon&display=swap" rel="stylesheet">
+
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+
+        <title>To-Do LİST</title>
+
+        <link rel="shortcut icon" href="https://img.icons8.com/parakeet/256/checklist.png">
+
+
+        {% endblock %}
+    </head>
+    <body style="background-color:#EDF1D6;color:white; text-decoration: none;font-family: 'Oswald', sans-serif;
+font-family: 'Tilt Neon', cursive;">
+<nav class="navbar bg-body-tertiary d-lg-flex" style="background-color:#3C2A21;padding-bottom:10px;margin-bottom:35px;text-align:center;">
+  <div class="container-fluid " style="padding-top:0px;text-align:center;">
+    <a class="navbar-brand nature-but" href="/" style="color:white; font-size:35px;font-family: 'Oswald', sans-serif;
+font-family: 'Tilt Prism', cursive; margin-left:auto;
+margin-right:auto;">
+      <img src="https://img.icons8.com/fluency/256/forest.png" alt="Bootstrap" width="90" height="104"> Naturel-Caffe-s    <img src="https://img.icons8.com/fluency/256/forest.png" alt="Bootstrap" width="90" height="104">
+
+    </a>
+
+  </div>
+</nav>
+        <!-- Your page content -->
+        {% block content %}{% endblock %}
+ <footer class="bg py-3" style="background-color:#3C2A21; margin-top:30px;">
+      <div class="container"  >
+
+        <p class="text-center" style="margin-top:40px;margin-bottom:20px;">
+
+              <a class="btn btn-danger btn-lg" href="https://www.instagram.com/bunyamin_ozak/" role="button" style="background-image: url('static/img/button image/insta_graident.jpg'); background-color:#FF0032;">
+  <i class="fa-brands fa-instagram"></i>
+</a>
+
+
+ <a class="btn btn-dark btn-lg" href="https://github.com/buniozak" role="button" style="background-image: url('static/img/button image/img_2.png'); background-color:#000000;">
+<i class="fa-brands fa-github"></i>
+</a> <br>
+          &copy;{{ current_year }} Find Yours Naturalist Coffe
+        </p>
+      </div>
+         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    </footer>
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+            <script src="https://kit.fontawesome.com/56be5f7b5c.js" crossorigin="anonymous"></script>
+
+        {% endblock %}
+    </body>
+</html>

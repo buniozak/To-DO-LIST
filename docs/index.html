@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+<style>
+
+.form-control{
+
+margin-left:10px;
+height:46px;
+}
+
+.entry-box{
+height:100px;
+margin-bottom:60px;
+margin-left:35px;
+font-size:28px;
+min-height: 10%;
+text-align:center;
+}
+entry-box, body {
+    min-height: 10%;
+}
+#add-entry {
+  left: 7px;
+  font-size:30px;
+  margin-left:12px;
+  margin-top:10px;
+  margin-right:15px;
+  height:80px;
+  color:#68B984;
+  width:100px;
+}
+.delete-button{
+
+
+position: absolute;
+  bottom: 10px;
+  left:15px;
+
+font-size:10px;
+height:45px;
+
+}
+
+input[type="checkbox"] {
+  transform: scale(2);
+    margin-top:14px;
+
+    background-color:white;
+}
+
+@media (max-width: 1000px) {
+  #add-entry {
+  left: 7px;
+  font-size:20px;
+  margin-left:12px;
+  margin-top:10px;
+  height:75px;
+  width:80px;
+}
+.entry-box{
+height:100px;
+margin-bottom:60px;
+font-size:20px;
+
+}
+}
+@media (max-width: 576px) {
+  #add-entry {
+  left: 7px;
+  font-size:20px;
+  margin-left:10px;
+  margin-top:24px;
+  height:55px;
+  width:80px;
+}
+.entry-box{
+ margin-left:10px;
+ padding-right:-10px;
+}
+}
+
+
+
+</style>
+
+
+
+
+<form action="/add" method="post">
+    <div class="row">
+  <div class="col-md-1 col-sm-1">
+  <button type="submit" id="add-entry" class="btn btn-dark"><i class="fa-solid fa-plus"></i></button>
+
+  </div>
+  <div class="col-sm-10 col-md-10" >
+   <input name="entry" class="form-control entry-box" id="entry" placeholder="Entry To do Something e.g Buy bread">
+  </div>
+</div>
+
+</form>
+
+
+
+{% if entries|length > 0 %}
+<div class="container-md container-sm container-lg" style="background-color:#EDF1D6;">
+
+{% for yazi in entries %}
+    <form action="{{ url_for('update_entry', id=yazi.id) }}" method="POST">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input checkbox" onchange="underlineText(this)">
+            <input id="entry_{{ yazi.id }}" name="entry_to"  type="text" class="form-control entry" value="{{ yazi.entry }}" disabled>
+            <a href="{{ url_for('delete_entry', id=yazi.id) }}">
+                <button style="margin-bottom:30px;margin-left:10px; " type="button" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+            </a>
+
+
+            <button style="margin-bottom:30px;margin-left:10px; display: none; " type="submit" class="btn btn-sm btn-success update"><i class="fa-solid fa-wrench"></i></button>
+            <button style="margin-bottom:30px;margin-left:10px; " type="button" class="btn btn-sm btn-info" onclick="moveUp('{{ yazi.id }}')"><i class="fa-solid fa-up-long"></i></button>
+            <button style="margin-bottom:30px;margin-left:10px; " type="button" class="btn btn-sm btn-warning" onclick="moveDown('{{ yazi.id }}')"><i class="fa-solid fa-down-long"></i></button>
+           </div>
+
+    </form>
+{% endfor %}
+{% endif %}
+</div>
+<script>
+function underlineText(checkbox) {
+  var entry = checkbox.parentElement.querySelector('.entry');
+  var update = checkbox.parentElement.querySelector('.update');
+  if (checkbox.checked) {
+    entry.style.textDecoration = "line-through";
+    entry.disabled = true;
+    update.style.display = "none";
+  } else {
+    entry.style.textDecoration = "none";
+    entry.disabled = false;
+
+    update.style.display = "block";
+  }
+}
+
+
+function moveUp(id) {
+  const currentEntry = document.querySelector(`#entry_${id}`).parentElement.parentElement;
+  const previousEntry = currentEntry.previousElementSibling;
+  if (previousEntry) {
+    currentEntry.parentNode.insertBefore(currentEntry, previousEntry);
+  }
+}
+
+function moveDown(id) {
+  const currentEntry = document.querySelector(`#entry_${id}`).parentElement.parentElement;
+  const nextEntry = currentEntry.nextElementSibling;
+  if (nextEntry) {
+    currentEntry.parentNode.insertBefore(nextEntry, currentEntry);
+  }
+}
+</script>
+
+
+
+
+
+
+{% endblock %}
